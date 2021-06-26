@@ -3,7 +3,7 @@ University project for serverless course
 
 Have you ever wondered about the quality of the air you are breathing, or maybe, why you sometimes feel sleepy in the office or tired in the morning even after sleeping all night? Poor air quality can lead to many negative health effects as well as can cause tiredness, headaches, loss of concentration, increased heart rate and so on. Monitoring the quality of the air may actually be more important than you realize. 
 
-In this simple IoT project, a sensor, detect Co2 values and send them to a queue of the RabbitMQ message broker. Then the monitor will read the message, and classifies the Co2 values as "Low", "Normal", or "High" and then send a message to 2 different queues: one where is a listening a FanSystem which will decrease or increase the speed of the fans. And another to a monitor for do simple live graph of the data.
+In this IoT project, a sensor will detect Co2 values and send them to a queue of the RabbitMQ message broker. Then the monitor will read the message, and classifies the Co2 values as "Low", "Normal" or "High" and then send a message to 2 different queues: one where is a listening a FanSystem which will decrease or increase the speed of the fans, and another to a monitor for do a simple live graph of the data.
 
 # Requirements
 
