@@ -1,0 +1,38 @@
+metadata:
+  name: ventilation
+  labels:
+    nuclio.io/project-name: air-quality
+spec:
+  handler: "main:handler"
+  runtime: nodejs
+  resources: {}
+  minReplicas: 1
+  maxReplicas: 1
+  triggers:
+    TriggerFan:
+      class: ""
+      kind: mqtt
+      name: TriggerFan
+      url: "guest:guest@172.17.0.1:1883"
+      attributes:
+        subscriptions:
+          - qos: 0
+            topic: iot/actuator/fansistem
+    default-http:
+      class: ""
+      kind: http
+      name: default-http
+      maxWorkers: 1
+  build:
+    functionSourceCode: dmFyIGFtcXAgPSByZXF1aXJlKCdhbXFwbGliJyk7DQogICAgdmFyIEZVTkNUSU9OX05BTUUgPSAiVkVOVElMQVRJT04iOw0KDQogICAgLy9zZW5kIGZlZWRiYWNrIHRvIHRoZSBsb2dnZXINCiAgICBmdW5jdGlvbiBzZW5kX2ZlZWRiYWNrKG1zZyl7DQogICAgICAgIHZhciBxID0gJ2lvdC9sb2dzJzsNCiAgICAgICAgYW1xcC5jb25uZWN0KCdhbXFwOi8vZ3Vlc3Q6Z3Vlc3RAMTcyLjE3LjAuMTo1NjcyJykudGhlbihmdW5jdGlvbihjb25uKSB7DQogICAgICAgICAgICByZXR1cm4gY29ubi5jcmVhdGVDaGFubmVsKCkudGhlbihmdW5jdGlvbihjaCkgew0KICAgICAgICAgICAgICAgIHZhciBvayA9IGNoLmFzc2VydFF1ZXVlKHEsIHtkdXJhYmxlOiBmYWxzZX0pOw0KICAgICAgICAgICAgICAgIHJldHVybiBvay50aGVuKGZ1bmN0aW9uKF9xb2spIHsNCiAgICAgICAgICAgICAgICBjaC5zZW5kVG9RdWV1ZShxLCBCdWZmZXIuZnJvbShtc2cpKTsNCiAgICAgICAgICAgICAgICByZXR1cm4gY2guY2xvc2UoKTsNCiAgICAgICAgICAgICAgICB9KTsNCiAgICAgICAgICAgIH0pLmZpbmFsbHkoZnVuY3Rpb24oKSB7IA0KICAgICAgICAgICAgICAgIGNvbm4uY2xvc2UoKTsNCiAgICAgICAgICAgIH0pOw0KICAgICAgICB9KS5jYXRjaChjb25zb2xlLndhcm4pOw0KICAgIH0NCg0KICAgIC8vY29udmVydCBmcm9tIGJpbmFyeSB0byBzdHJpbmcsIGNhbiBiZSB1c2VmdWxsDQogICAgZnVuY3Rpb24gYmluMnN0cmluZyhhcnJheSl7DQogICAgICAgIHZhciByZXN1bHQgPSAiIjsNCiAgICAgICAgZm9yKHZhciBpID0gMDsgaSA8IGFycmF5Lmxlbmd0aDsgKytpKXsNCiAgICAgICAgcmVzdWx0Kz0gKFN0cmluZy5mcm9tQ2hhckNvZGUoYXJyYXlbaV0pKTsNCiAgICAgICAgfQ0KICAgICAgICByZXR1cm4gcmVzdWx0Ow0KICAgIH0NCg0KICAgIGV4cG9ydHMuaGFuZGxlciA9IGZ1bmN0aW9uKGNvbnRleHQsIGV2ZW50KSB7DQogICAgICAgIHZhciBfZXZlbnQgPSBKU09OLnBhcnNlKEpTT04uc3RyaW5naWZ5KGV2ZW50KSk7DQogICAgICAgIHZhciBfZGF0YSA9IGJpbjJzdHJpbmcoX2V2ZW50LmJvZHkuZGF0YSk7DQoNCiAgICAgICAgY29udGV4dC5jYWxsYmFjaygnTVFUVCBNZXNzYWdlIFNlbnQgJyArIF9kYXRhICk7IA0KDQogICAgICAgIHNlbmRfZmVlZGJhY2soIkludm9rZWQgRnVuY3Rpb24gTVFUVDogIitGVU5DVElPTl9OQU1FKyIgVGhlIGZhbiBzcGVlZCBpcyBzZXR0ZWQgYXQgIitfZGF0YSk7DQogICAgfTsNCg==
+    commands:
+      - 'npm install amqplib'
+    runtimeAttributes:
+      repositories: []
+    codeEntryType: sourceCode
+    timestamp: 1624727727
+  loggerSinks:
+    - level: debug
+  platform: {}
+  securityContext: {}
+  eventTimeout: ""

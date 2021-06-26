@@ -1,0 +1,31 @@
+metadata:
+  name: sensor
+  labels:
+    nuclio.io/project-name: air-quality
+spec:
+  description: "Function to generate a value from a sensor to send to a MQTT queue"
+  handler: "main:handler"
+  runtime: nodejs
+  resources: {}
+  minReplicas: 1
+  maxReplicas: 1
+  triggers:
+    default-http:
+      class: ""
+      kind: http
+      name: default-http
+      maxWorkers: 1
+  build:
+    functionSourceCode: dmFyIG1xdHQgPSByZXF1aXJlKCdtcXR0JyksIHVybCA9IHJlcXVpcmUoJ3VybCcpOw0KDQp2YXIgbXF0dF91cmwgPSB1cmwucGFyc2UocHJvY2Vzcy5lbnYuQ0xPVURBTVFQX01RVFRfVVJMIHx8ICdtcXR0Oi8vZ3Vlc3Q6Z3Vlc3RAMTcyLjE3LjAuMToxODgzJyk7DQp2YXIgYXV0aCA9IChtcXR0X3VybC5hdXRoIHx8ICc6Jykuc3BsaXQoJzonKTsNCnZhciB1cmwgPSAibXF0dDovLyIgKyBtcXR0X3VybC5ob3N0Ow0KDQp2YXIgb3B0aW9ucyA9IHsNCiAgcG9ydDogbXF0dF91cmwucG9ydCwNCiAgY2xpZW50SWQ6ICdtcXR0anNfJyArIE1hdGgucmFuZG9tKCkudG9TdHJpbmcoMTYpLnN1YnN0cigyLCA4KSwNCiAgdXNlcm5hbWU6IGF1dGhbMF0sDQogIHBhc3N3b3JkOiBhdXRoWzFdLA0KfTsNCg0KZXhwb3J0cy5oYW5kbGVyID0gZnVuY3Rpb24oY29udGV4dCwgZXZlbnQpIHsNCiAgICB2YXIgY2xpZW50ID0gbXF0dC5jb25uZWN0KHVybCwgb3B0aW9ucyk7IA0KDQogICAgY2xpZW50Lm9uKCdjb25uZWN0JywgZnVuY3Rpb24oKSB7DQogICAgICAgIHggPSAoTWF0aC5mbG9vcihNYXRoLnJhbmRvbSgpKjMwKSkudG9TdHJpbmcoKTsNCiAgICAgICAgY2xpZW50LnB1Ymxpc2goJ2lvdC9zZW5zb3JzL2NvMicsIHgsIGZ1bmN0aW9uKCkgew0KICAgICAgICAgICAgY2xpZW50LmVuZCgpOyANCiAgICAgICAgICAgIGNvbnRleHQuY2FsbGJhY2soJ01RVFQgTWVzc2FnZSBTZW50ICcgKyB4ICk7IA0KICAgICAgICB9KTsgICAgICAgICAgICANCiAgICB9KTsgICAgICAgIA0KfTs=
+    commands:
+      - 'npm install mqtt'
+    runtimeAttributes:
+      repositories: []
+    codeEntryType: sourceCode
+    timestamp: 1624725272
+  loggerSinks:
+    - level: debug
+  platform: {}
+  securityContext:
+    runAsUser: 0
+  eventTimeout: ""
