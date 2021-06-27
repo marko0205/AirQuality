@@ -1,0 +1,40 @@
+metadata:
+  name: consumer
+  labels:
+    nuclio.io/project-name: air-quality
+spec:
+  description: "Function the is called when a new message is arrived on the iot/sensors/co2 queue. the function send  back a feedback on the iot/logs queue."
+  handler: "main:handler"
+  runtime: nodejs
+  resources: {}
+  minReplicas: 1
+  maxReplicas: 1
+  triggers:
+    MqttTrigger:
+      class: ""
+      kind: mqtt
+      name: MqttTrigger
+      url: "guest:guest@172.17.0.1:1883"
+      attributes:
+        subscriptions:
+          - qos: 0
+            topic: iot/sensors/co2
+    default-http:
+      class: ""
+      kind: http
+      name: default-http
+      maxWorkers: 1
+  build:
+    functionSourceCode: dmFyIGFtcXAgPSByZXF1aXJlKCdhbXFwbGliJyk7DQp2YXIgbXF0dCA9IHJlcXVpcmUoJ21xdHQnKSwgdXJsID0gcmVxdWlyZSgndXJsJyk7DQogICAgdmFyIEZVTkNUSU9OX05BTUUgPSAiTU9OSVRPUiI7DQoNCiAgICB2YXIgbXF0dF91cmwgPSB1cmwucGFyc2UocHJvY2Vzcy5lbnYuQ0xPVURBTVFQX01RVFRfVVJMIHx8ICdtcXR0Oi8vZ3Vlc3Q6Z3Vlc3RAMTcyLjE3LjAuMToxODgzJyk7DQogICAgdmFyIGF1dGggPSAobXF0dF91cmwuYXV0aCB8fCAnOicpLnNwbGl0KCc6Jyk7DQogICAgdmFyIHVybCA9ICJtcXR0Oi8vIiArIG1xdHRfdXJsLmhvc3Q7DQoNCiAgICB2YXIgb3B0aW9ucyA9IHsNCiAgICBwb3J0OiBtcXR0X3VybC5wb3J0LA0KICAgIGNsaWVudElkOiAnbXF0dGpzXycgKyBNYXRoLnJhbmRvbSgpLnRvU3RyaW5nKDE2KS5zdWJzdHIoMiwgOCksDQogICAgdXNlcm5hbWU6IGF1dGhbMF0sDQogICAgcGFzc3dvcmQ6IGF1dGhbMV0sDQogICAgfTsNCg0KICAgIA0KICAgIC8vc2VuZCB2YWx1ZXMgdG8gdGhlIG1vbml0b3INCiAgICBmdW5jdGlvbiBzZW5kVG9Nb25pdG9yKG1zZyl7DQogICAgICAgIHZhciBxID0gJ2lvdC9ncmFwaCc7DQogICAgICAgIGFtcXAuY29ubmVjdCgnYW1xcDovL2d1ZXN0Omd1ZXN0QDE3Mi4xNy4wLjE6NTY3MicpLnRoZW4oZnVuY3Rpb24oY29ubikgew0KICAgICAgICAgICAgcmV0dXJuIGNvbm4uY3JlYXRlQ2hhbm5lbCgpLnRoZW4oZnVuY3Rpb24oY2gpIHsNCiAgICAgICAgICAgICAgICB2YXIgb2sgPSBjaC5hc3NlcnRRdWV1ZShxLCB7ZHVyYWJsZTogZmFsc2V9KTsNCiAgICAgICAgICAgICAgICByZXR1cm4gb2sudGhlbihmdW5jdGlvbihfcW9rKSB7DQogICAgICAgICAgICAgICAgY2guc2VuZFRvUXVldWUocSwgQnVmZmVyLmZyb20obXNnKSk7DQogICAgICAgICAgICAgICAgcmV0dXJuIGNoLmNsb3NlKCk7DQogICAgICAgICAgICB9KTsNCiAgICAgICAgICAgIH0pLmZpbmFsbHkoZnVuY3Rpb24oKSB7IA0KICAgICAgICAgICAgICAgIGNvbm4uY2xvc2UoKTsNCiAgICAgICAgICAgIH0pOw0KICAgICAgICB9KS5jYXRjaChjb25zb2xlLndhcm4pOw0KICAgIH0NCg0KICAgIC8vY29udmVydCBmcm9tIGJpbmFyeSB0byBzdHJpbmcsIGNhbiBiZSB1c2VmdWxsDQogICAgZnVuY3Rpb24gYmluMnN0cmluZyhhcnJheSl7DQogICAgICAgIHZhciByZXN1bHQgPSAiIjsNCiAgICAgICAgZm9yKHZhciBpID0gMDsgaSA8IGFycmF5Lmxlbmd0aDsgKytpKXsNCiAgICAgICAgcmVzdWx0Kz0gKFN0cmluZy5mcm9tQ2hhckNvZGUoYXJyYXlbaV0pKTsNCiAgICAgICAgfQ0KICAgICAgICByZXR1cm4gcmVzdWx0Ow0KICAgIH0NCg0KICAgIGZ1bmN0aW9uIHNlbmRUb0Zhbih2YWwpew0KICAgICAgICB2YXIgY2xpZW50ID0gbXF0dC5jb25uZWN0KHVybCwgb3B0aW9ucyk7DQogICAgICAgIGNsaWVudC5vbignY29ubmVjdCcsIGZ1bmN0aW9uKCkgew0KICAgICAgICAgICAgY2xpZW50LnB1Ymxpc2goJ2lvdC9hY3R1YXRvci9mYW5zaXN0ZW0nLCB2YWwudG9TdHJpbmcoKSwgZnVuY3Rpb24oKSB7DQogICAgICAgICAgICAgICAgY2xpZW50LmVuZCgpOyANCiAgICAgICAgICAgIH0gKTsgICAgICAgICAgICAgICAgDQogICAgICAgIH0pOyAgDQogICAgfQ0KDQogICAgLy9EbyBhY3Rpb24gYWJvdXQgdGhlIGNvMiB2YWx1ZQ0KICAgIGV4cG9ydHMuaGFuZGxlciA9IGZ1bmN0aW9uKGNvbnRleHQsIGV2ZW50KSB7DQogICAgICAgIHZhciBfZXZlbnQgPSBKU09OLnBhcnNlKEpTT04uc3RyaW5naWZ5KGV2ZW50KSk7DQogICAgICAgIHZhciBfZGF0YSA9IHBhcnNlSW50KGJpbjJzdHJpbmcoX2V2ZW50LmJvZHkuZGF0YSkpOw0KDQogICAgICAgIGlmIChfZGF0YSA+PSAyMCkgew0KICAgICAgICAgICAgc2VuZFRvRmFuKDIpDQogICAgICAgIH0NCiAgICAgICAgZWxzZSBpZiAoX2RhdGEgPiAxMCAmJiAgX2RhdGEgPCAyMCkgew0KICAgICAgICAgICAgc2VuZFRvRmFuKDEpDQogICAgICAgIH0NCiAgICAgICAgZWxzZSBpZiAoX2RhdGEgPD0gMTApIHsNCiAgICAgICAgICAgIHNlbmRUb0ZhbigwKQ0KICAgICAgICB9DQogICAgICAgIHNlbmRUb01vbml0b3IoX2RhdGEudG9TdHJpbmcoKSk7DQogICAgICAgIGNvbnRleHQuY2FsbGJhY2soJ01lc3NhZ2VzIFNlbnQgdG8gZmFuIHN5c3RlbSBhbmQgbW9uaXRvcicpOyANCiAgICB9Ow0K
+    commands:
+      - 'npm install amqplib'
+      - 'npm install mqtt'
+    runtimeAttributes:
+      repositories: []
+    codeEntryType: sourceCode
+    timestamp: 1624807108
+  loggerSinks:
+    - level: debug
+  platform: {}
+  securityContext: {}
+  eventTimeout: ""
