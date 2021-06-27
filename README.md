@@ -5,6 +5,8 @@ Have you ever wondered about the quality of the air you are breathing, or maybe,
 
 In this IoT project, a sensor will detect Co2 values and send them to a queue of the RabbitMQ message broker. Then the monitor will read the message, and classifies the Co2 values as "Low", "Normal" or "High" and then send a message to 2 different queues: one where is a listening a FanSystem which will decrease or increase the speed of the fans, and another to a monitor for do a simple live graph of the data.
 
+<p align="center"><img src="/Assets/Architecture.png" width="900"/></p>
+
 # Requirements
 
 - Ubuntu 20.04
